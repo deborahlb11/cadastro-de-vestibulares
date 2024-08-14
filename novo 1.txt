@@ -1,0 +1,140 @@
+// Algumas funções para estudar 
+<?php
+// Verifica se é necessário bloquear ou liberar o formulário
+function isFormEnabled() {
+    // Data atual
+    $currentDate = new DateTime();
+    
+    // Data de início do formulário (assumindo 1º de janeiro de 2024)
+    $formStartDate = new DateTime('2024-01-01');
+    
+    // Data de término original do formulário (assumindo 31 de janeiro de 2024)
+    $formEndDate = new DateTime('2024-01-31');
+    
+    // Verifica se a data atual está entre a data de início e a data de término original
+    if ($currentDate >= $formStartDate && $currentDate <= $formEndDate) {
+        return true;
+    }
+    
+    // Verifica se houve prorrogação (assumindo até 28 de fevereiro de 2024)
+    $extendedEndDate = new DateTime('2024-02-28');
+    if ($currentDate <= $extendedEndDate) {
+        return true;
+    }
+    
+    // Se não estiver dentro do período de abertura ou prorrogação, retorna falso
+    return false;
+}
+
+// Exemplo de uso:
+if (isFormEnabled()) {
+    // O formulário está habilitado, exiba-o
+    include 'formulario.html';
+} else {
+    // O formulário está desabilitado, exiba uma mensagem ou redirecione para outra página
+    echo "O formulário está indisponível no momento.";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand">Cadastro de Oferta</a>
+        </div>
+        <div class="d-flex">
+            <a href="index.php" class="btn btn-danger me-5">Voltar</a>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="m-5">
+        <table class="table text-white table-bg" method="post" action="salvar_oferta.php">
+            <thead>
+				<tr>
+					<th scope="col">Tipo de concurso : </th>
+					 <th>
+						<div class="wrap-input100 validate-input" data-validate ="Escolha um perfil">
+						<select class="input100" name="id_conc">     
+							<option value=""selected>Concurso</option>
+                                    <option value='1'>Vestibular</option>
+                                    <option value='2'>ENEM</option>  <!-- ver que precisa mais cadastrar -->
+									<option value='3'>Diplomado</option> 
+									<option value='4'>Transferência</option> 
+						</select>  
+					 </th>
+				</tr>
+                <tr>
+                    <th scope="col">Id Oferta</th>
+                    <th scope="col">Estabelecimento</th>
+                    <th scope="col">Período</th>
+                    <th scope="col">Abertura da Inscrição</th>
+                    <th scope="col">Fechamento da Inscrição</th>
+                    <th scope="col">Prorrogação</th>
+                    <th scope="col">Presencial Primeiro Semestre</th>
+                    <th scope="col">Ead Primeiro Semestre</th>
+                    <th scope="col">Presencial Segundo Semestre </th>
+                    <th scope="col">Ead Segundo Semestre</th>
+					<th scope="col">Taxa</th>
+                </tr>
+            </thead>
+            <tbody>
+				  <tr>
+					 <th>
+					 <input class= "input100" type="number" name= "id_oferta"  > 
+					 </th>
+					  <th>
+					 <input class= "input100" type="number" name="estabelecimento" > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="date" name= "periodo"  > 
+					 </th> 
+					 <th> 
+					 <input class= "input100" type="date" name= "abertura"  > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="date" name= "fechamento" > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="number" name= "prorrogacao" > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="date" name= "pren_pri_sem"  > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="date" name= "ead_pri_sem"  > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="date" name= "pren_seg_sem"  > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="date" name= "ead_seg_sem"  > 
+					 </th> 
+					 <th>
+					 <input class= "input100" type="text" name= "taxa" > 
+					 </th> 
+                </tr>   
+				<tr>
+					 <th>
+						 <div class="d-flex">
+							<input  type="submit" class="btn btn-danger me-5" value="Salvar"> </input>
+						</div>
+						
+					 </th>
+				</tr>	
+            </tbody>
+        </table>
+    </div>
+		<br>
+            </tbody>
+        </table>
+    </div>
+	
+</body>
+</html>
+
